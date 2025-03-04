@@ -1,70 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Security Analysis Report</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Security Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        h1, h2 { color: #336699; }
+        .summary { background: #f5f5f5; padding: 10px; margin: 10px 0; }
+        .issue { border-left: 3px solid #999; padding-left: 10px; margin: 15px 0; }
+        .high { border-left-color: #cc0000; }
+        .medium { border-left-color: #ff9900; }
+        .low { border-left-color: #009900; }
+        button { background: #336699; color: white; border: none; padding: 8px; cursor: pointer; }
+    </style>
 </head>
 <body>
-    <div class="container mt-4 mb-5">
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="card shadow">
-                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                        <h1 class="h3 mb-0">Security Analysis Report</h1>
-                        <a href="/" class="btn btn-outline-light btn-sm">Upload Another</a>
-                    </div>
-                    
-                    <div class="card-body">
-                        <div class="section mb-4">
-                            <h2 class="h4 border-bottom pb-2">Executive Summary</h2>
-                            <p class="lead">{{ result.summary }}</p>
-                        </div>
-                        
-                        <div class="section mb-4">
-                            <h2 class="h4 border-bottom pb-2">Identified Security Issues</h2>
-                            
-                            {% if result.issues %}
-                                {% for issue in result.issues %}
-                                <div class="card mb-3 border-0 shadow-sm issue-card severity-{{ issue.severity|lower }}">
-                                    <div class="card-header d-flex justify-content-between align-items-center">
-                                        <h3 class="h5 mb-0">{{ issue.title }}</h3>
-                                        <span class="badge bg-{{ 'danger' if issue.severity == 'HIGH' else 'warning' if issue.severity == 'MEDIUM' else 'success' }}">
-                                            {{ issue.severity }}
-                                        </span>
-                                    </div>
-                                    <div class="card-body">
-                                        <p><strong>Description:</strong> {{ issue.description }}</p>
-                                        <p class="mb-0"><strong>Recommendation:</strong> {{ issue.recommendation }}</p>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            {% else %}
-                                <div class="alert alert-info">No security issues were identified.</div>
-                            {% endif %}
-                        </div>
-                        
-                        <div class="section">
-                            <h2 class="h4 border-bottom pb-2">Recommended Actions</h2>
-                            
-                            {% if result.recommendations %}
-                                <ol class="list-group list-group-numbered">
-                                    {% for rec in result.recommendations %}
-                                    <li class="list-group-item">{{ rec }}</li>
-                                    {% endfor %}
-                                </ol>
-                            {% else %}
-                                <p>No specific recommendations provided.</p>
-                            {% endif %}
-                        </div>
-                    </div>
-                    
-                    <div class="card-footer text-muted">
-                        <small>Analysis generated using Google Vertex AI Gemini. This report should be reviewed by a security professional.</small>
-                    </div>
-                </div>
-            </div>
+    <h1>Security Analysis Report</h1>
+    <a href="/"><button>Upload Another File</button></a>
+    
+    <h2>Summary</h2>
+    <div class="summary">{{ result.summary }}</div>
+    
+    <h2>Issues</h2>
+    {% if result.issues %}
+        {% for issue in result.issues %}
+        <div class="issue {{ issue.severity|lower }}">
+            <h3>{{ issue.title }} <span style="color: {% if issue.severity == 'HIGH' %}#cc0000{% elif issue.severity == 'MEDIUM' %}#ff9900{% else %}#009900{% endif %};">({{ issue.severity }})</span></h3>
+            <p><strong>Description:</strong> {{ issue.description }}</p>
+            <p><strong>Recommendation:</strong> {{ issue.recommendation }}</p>
         </div>
-    </div>
+        {% endfor %}
+    {% else %}
+        <p>No issues found.</p>
+    {% endif %}
+    
+    <h2>Recommendations</h2>
+    {% if result.recommendations %}
+        <ul>
+            {% for rec in result.recommendations %}
+            <li>{{ rec }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No specific recommendations.</p>
+    {% endif %}
 </body>
 </html>
