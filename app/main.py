@@ -9,7 +9,7 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max upload
 
 # Initialize Vertex AI
 aiplatform.init(
-    project=os.environ.get("GOOGLE_CLOUD_PROJECT", "your-project-id"),
+    project=os.environ.get("GOOGLE_CLOUD_PROJECT", "steel-wall-403114"),
     location=os.environ.get("GOOGLE_CLOUD_REGION", "us-central1")
 )
 
