@@ -1,0 +1,29 @@
+/* Custom styles */
+.severity-high {
+    border-left: 5px solid #dc3545;
+}
+
+.severity-medium {
+    border-left: 5px solid #ffc107;
+}
+
+.severity-low {
+    border-left: 5px solid #28a745;
+}
+
+pre code {
+    display: block;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    overflow-x: auto;
+}
+
+.issue-card {
+    transition: transform 0.2s;
+}
+
+.issue-card:hover {
+    transform: translateY(-3px);
+}
