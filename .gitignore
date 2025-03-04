@@ -3,3 +3,4 @@ google-cloud-cli-linux-x86_64.tar.gz
 sample1.json
 sample2.json
 .gitignore
+.gcloudignore

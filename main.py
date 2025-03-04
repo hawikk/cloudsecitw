@@ -4,12 +4,23 @@ import os
 from vertexai.preview.generative_models import GenerativeModel
 from google.cloud import aiplatform
 
-app = Flask(__name__, 
-            template_folder='templates',
-            static_folder='static')
+app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max upload
 
 # Initialize Vertex AI
+
+@app.route('/debug')
+def debug():
+    import sys
+    return {
+        'cwd': os.getcwd(),
+        'listdir': os.listdir('.'),
+        'templates_exists': os.path.exists('templates'),
+        'templates_content': os.listdir('templates') if os.path.exists('templates') else [],
+        'python_version': sys.version,
+        'env': dict(os.environ)
+    }
+    
 aiplatform.init(
     project=os.environ.get("GOOGLE_CLOUD_PROJECT", "steel-wall-403114"),
     location=os.environ.get("GOOGLE_CLOUD_REGION", "us-central1")
@@ -153,5 +164,7 @@ def index():
     return render_template('upload.html')
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8080))
-    app.run(host='0.0.0.0', port=port, debug=os.environ.get('DEBUG', False))
+    # This is used when running locally only
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)), debug=True)
+    
+    
