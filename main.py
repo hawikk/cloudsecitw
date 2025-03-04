@@ -7,22 +7,31 @@ import tempfile
 app = Flask(__name__)
 
 def analyze_config(config_data):
-    aiplatform.init(project="steel-wall-403114", location="europe-west1")
+    aiplatform.init(project="steel-wall-403114", location="us-central1")
     
     prompt = f"""
-    Analyze this cloud configuration JSON for security issues:
-    {json.dumps(config_data, indent=2)}
+    Analyze this cloud configuration JSON for security issues. 
+    Provide response in EXACTLY this format:
     
-    Provide response in this format:
-    Summary: [brief summary]
-    Issues:
-    - Issue: [issue description]
-      Recommendation: [mitigation steps]
-    - Issue: [issue description]
-      Recommendation: [mitigation steps]
+    [SUMMARY]
+    {{insert concise 2-3 sentence summary here}}
+    
+    [ISSUES]
+    Issue: {{issue title}}
+    Severity: (HIGH/MEDIUM/LOW)
+    Description: {{issue description}}
+    Recommendation: {{mitigation steps}}
+    ---
+    Issue: {{next issue}}
+    Severity: 
+    Description: 
+    Recommendation: 
+    
+    [CONCLUSION]
+    {{final recommendations}}
     """
     
-    model = GenerativeModel("gemini-1.0-flash-001")
+    model = GenerativeModel("gemini-2.0-flash")
     response = model.generate_content(prompt)
     return response.text
 

@@ -1,9 +1,62 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>Security Report</title>
+    <style>
+        .report { max-width: 800px; margin: 2rem auto; padding: 2rem; }
+        .section { margin-bottom: 2rem; }
+        .issue { 
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .severity-high { border-left: 4px solid #dc3545; }
+        .severity-medium { border-left: 4px solid #ffc107; }
+        .severity-low { border-left: 4px solid #28a745; }
+        .badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
 <body>
-    <h1>Security Analysis Report</h1>
-    <div id="report-content">
-        {{ result|safe }}
+    <div class="report">
+        <h1>🔒 Security Analysis Report</h1>
+        <a href="/">← Upload Another File</a>
+
+        <div class="section">
+            <h2>📌 Executive Summary</h2>
+            <p>{{ result.summary }}</p>
+        </div>
+
+        <div class="section">
+            <h2>🚨 Identified Issues</h2>
+            {% for issue in result.issues %}
+            <div class="issue severity-{{ issue.severity|lower }}">
+                <div class="d-flex justify-content-between">
+                    <h3>{{ issue.title }}</h3>
+                    <span class="badge severity-{{ issue.severity|lower }}">
+                        {{ issue.severity }}
+                    </span>
+                </div>
+                <div class="description">
+                    <p><strong>Description:</strong> {{ issue.description }}</p>
+                    <p><strong>Recommendation:</strong> {{ issue.recommendation }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="section">
+            <h2>✅ Recommendations</h2>
+            <ul>
+                {% for rec in result.recommendations %}
+                <li>{{ rec }}</li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 </body>
 </html>
