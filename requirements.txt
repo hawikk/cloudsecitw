@@ -1,0 +1,4 @@
+flask
+google-cloud-aiplatform
+gunicorn
+google-cloud-aiplatform>=1.46.0
