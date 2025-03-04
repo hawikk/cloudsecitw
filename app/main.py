@@ -4,7 +4,9 @@ import os
 from vertexai.preview.generative_models import GenerativeModel
 from google.cloud import aiplatform
 
-app = Flask(__name__)
+app = Flask(__name__, 
+            template_folder='templates',
+            static_folder='static')
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max upload
 
 # Initialize Vertex AI
