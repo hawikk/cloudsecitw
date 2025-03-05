@@ -29,19 +29,6 @@
             <p><strong>Recommendation:</strong> {{ issue.recommendation }}</p>
         </div>
         {% endfor %}
-    {% else %}
-        <p>No issues found.</p>
-    {% endif %}
-    
-    <h2>Recommendations</h2>
-    {% if result.recommendations %}
-        <ul>
-            {% for rec in result.recommendations %}
-            <li>{{ rec }}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No specific recommendations.</p>
     {% endif %}
 </body>
 </html>
