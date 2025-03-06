@@ -7,6 +7,9 @@ curl https://sdk.cloud.google.com | bash
 exec -l $SHELL
 gcloud init
 
+- In case that gcloud auth asks for a region, choose us-central
+gcloud auth
+
  - Clone  project
 
 git clone https://github.com/hawikk/cloudsecitw
