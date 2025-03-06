@@ -48,18 +48,21 @@ gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT \
 
 # 4. Configure Environment
 
- Set environment variables
+ Set environment variables -> 
+
 export GOOGLE_CLOUD_PROJECT="your-project-id"
 export GOOGLE_CLOUD_REGION="us-central1"
 
- Update requirements
+ Update requirements ->
+
 pip install -r requirements.txt
 
 
 # 5. Deployment
-App Engine 
 
- Deploy to App Engine
+
+ Deploy to App Engine ->
+
 gcloud app deploy --project=$GOOGLE_CLOUD_PROJECT
 
  After deployment, open in browser
