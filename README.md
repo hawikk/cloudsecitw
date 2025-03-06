@@ -37,6 +37,7 @@ gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT \
 # 4. Configure Environment
 
  - Set environment variables -> 
+ - I recommend us-central1 due to AI availability (should be everywhere but just in case)
 
 export GOOGLE_CLOUD_PROJECT="your-project-id"
 export GOOGLE_CLOUD_REGION="us-central1"
