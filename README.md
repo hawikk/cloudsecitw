@@ -84,3 +84,13 @@ The infrastructure leverages Google Cloud's managed services for:
 - All analysis occurs within Google's trusted execution environment
 - No third-party AI providers involved in data processing
 - Service account uses minimal required permissions
+
+# APP Quick overview
+Simple frontend for the app
+![Alt text](/images/app1.png?raw=true "Simple frontend for the app")
+
+Select the file to scan
+![Alt text](/images/app2.png?raw=true "Select the file to scan")
+
+Scanning results
+![Alt text](/images/app3.png?raw=true "Scanning results")
