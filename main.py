@@ -8,9 +8,10 @@ app = Flask(__name__)
 
 # Initialize Vertex AI
 aiplatform.init(
-    project=os.environ.get("GOOGLE_CLOUD_PROJECT", "steel-wall-403114"),
-    location=os.environ.get("GOOGLE_CLOUD_REGION", "us-central1")
+    project=os.environ.get("GOOGLE_CLOUD_PROJECT"),
+    location=os.environ.get("GOOGLE_CLOUD_REGION")
 )
+
 
 def analyze_config(config_data):
     """Analyze cloud configuration using Vertex AI Gemini"""

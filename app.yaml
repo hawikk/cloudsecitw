@@ -2,7 +2,7 @@ runtime: python39
 entrypoint: gunicorn -b :$PORT main:app
 
 env_variables:
-  GOOGLE_CLOUD_PROJECT: "steel-wall-403114"
+  GOOGLE_CLOUD_PROJECT: ${GOOGLE_CLOUD_PROJECT}
   GOOGLE_CLOUD_REGION: "us-central1"
 
 instance_class: F2

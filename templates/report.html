@@ -24,7 +24,14 @@
     {% if result.issues %}
         {% for issue in result.issues %}
         <div class="issue {{ issue.severity|lower }}">
-            <h3>{{ issue.title }} <span style="color: {% if issue.severity == 'HIGH' %}#cc0000{% elif issue.severity == 'MEDIUM' %}#ff9900{% else %}#009900{% endif %};">({{ issue.severity }})</span></h3>
+            <h3>{{ issue.title }} 
+                <span style="color: 
+                    {% if issue.severity == 'HIGH' %}#cc0000
+                    {% elif issue.severity == 'MEDIUM' %}#ff9900
+                    {% elif issue.severity == 'LOW' %}#009900
+                    {% endif %}
+                ;">({{ issue.severity }})</span>
+            </h3>
             <p><strong>Description:</strong> {{ issue.description }}</p>
             <p><strong>Recommendation:</strong> {{ issue.recommendation }}</p>
         </div>
